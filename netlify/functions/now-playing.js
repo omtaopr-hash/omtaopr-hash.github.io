@@ -1,62 +1,68 @@
+// Этот API-клиент нужен для запросов к сторонним сервисам (Яндекс)
 const fetch = require('node-fetch');
 
 // Это API Яндекса для получения статуса аккаунта (там содержится текущий трек)
-const YM_API_STATUS_URL = 'https://api.music.yandex.net/account/status'; 
+const YM_API_STATUS_URL = 'https://api.music.yandex.net/account/status';
 
+// Главная функция, которую вызывает Netlify
 exports.handler = async (event, context) => {
-  // Токен БЕРЕТСЯ ИЗ СКРЫТОЙ ПЕРЕМЕННОЙ ОКРУЖЕНИЯ NETLIFY
-  const YM_TOKEN = process.env.YANDEX_MUSIC_TOKEN; 
+    // Токен берется из СКРЫТОЙ ПЕРЕМЕННОЙ ОКРУЖЕНИЯ NETLIFY
+    const YM_TOKEN = process.env.YANDEX_MUSIC_TOKEN;
 
-  if (!YM_TOKEN) {
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ error: "Token is missing in Netlify settings" }),
-    };
-  }
-
-  try {
-    const response = await fetch(YM_API_STATUS_URL, {
-      headers: {
-        'Authorization': `OAuth ${YM_TOKEN}`, // Используем твой токен
-        'Content-Type': 'application/json',
-      },
-    });
-
-    if (!response.ok) {
-        const errorText = await response.text();
+    if (!YM_TOKEN) {
         return {
-            statusCode: response.status,
-            body: JSON.stringify({ error: `Yandex API error: ${errorText}` }),
+            statusCode: 500,
+            body: JSON.stringify({ error: 'Token is missing in Netlify settings' }),
         };
     }
 
-    const data = await response.json();
-    
-    // Парсим ответ Яндекса
-    const track = data.result && data.result.player && data.result.player.track;
+    try {
+        const response = await fetch(YM_API_STATUS_URL, {
+            headers: {
+                // Используем твой токен для авторизации
+                'Authorization': `OAuth ${YM_TOKEN}`, 
+                'Content-Type': 'application/json',
+            },
+        });
 
-    if (track) {
+        if (!response.ok) {
+            // Если Яндекс вернул ошибку, например, 401 (токен неверный), 
+            // то возвращаем ошибку, чтобы на сайте не было плашки.
+            console.error(`Yandex API Error: ${response.status} ${response.statusText}`);
+            return {
+                statusCode: 200, // Возвращаем 200, но с пустыми данными, чтобы не ломать сайт
+                body: JSON.stringify({ isPlaying: false, trackName: null, artistName: null }),
+            };
+        }
+
+        const data = await response.json();
+        
+        // Проверяем, играет ли трек
+        if (data.result && data.result.player && data.result.player.track) {
+            const track = data.result.player.track;
+            
+            return {
+                statusCode: 200,
+                body: JSON.stringify({
+                    isPlaying: true,
+                    trackName: track.title,
+                    artistName: track.artists.map(a => a.name).join(', '),
+                    link: `https://music.yandex.ru/track/${track.id}`,
+                }),
+            };
+        } else {
+            // Музыка не играет
+            return {
+                statusCode: 200,
+                body: JSON.stringify({ isPlaying: false }),
+            };
+        }
+
+    } catch (error) {
+        console.error("Function Error:", error);
         return {
-            statusCode: 200,
-            body: JSON.stringify({
-                trackName: track.title,
-                artistName: track.artists.map(a => a.name).join(', '),
-            }),
-        };
-    } else {
-        // Нет играющего трека
-        return {
-            statusCode: 200,
-            body: JSON.stringify({ trackName: "Музыка не играет...", artistName: "Яндекс Музыка" }),
+            statusCode: 500,
+            body: JSON.stringify({ error: 'Internal Server Error' }),
         };
     }
-
-  } catch (error) {
-    console.error(error);
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ error: 'Internal server error during fetch' }),
-    };
-  }
 };
-feat: add yandex music function.
