@@ -4,15 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Мои ссылки</title>
-    <!-- Подключаем иконки (Font Awesome) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* 1. Настройка фона и шрифтов */
         body {
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background: linear-gradient(45deg, #1a1a2e, #16213e, #0f3460); /* Темный градиент */
+            /* Я немного поменял фон под цвета Евангелиона (темно-синий/фиолетовый) */
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
             color: white;
             min-height: 100vh;
             display: flex;
@@ -20,43 +19,41 @@
             align-items: center;
         }
 
-        /* 2. Контейнер (карточка) */
         .container {
             width: 100%;
-            max-width: 400px; /* Ширина как у мобильника */
+            max-width: 400px;
             padding: 40px 20px;
             text-align: center;
         }
 
-        /* 3. Фото профиля */
         .avatar {
             width: 120px;
             height: 120px;
             border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid rgba(255, 255, 255, 0.2);
+            object-fit: cover; /* Это важно, чтобы картинка не сплющилась */
+            object-position: center top; /* Фокус на лицо */
+            border: 3px solid rgba(255, 255, 255, 0.3);
             margin-bottom: 15px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            box-shadow: 0 0 20px rgba(142, 68, 173, 0.5); /* Фиолетовое свечение */
         }
 
-        /* 4. Текст имени и описания */
         h1 {
             font-size: 1.5rem;
             margin: 0 0 10px;
             font-weight: 700;
+            text-shadow: 0 0 10px rgba(255,255,255,0.3);
         }
 
         p.bio {
-            color: #aeb4b7;
+            color: #d1d1d1;
             font-size: 0.95rem;
             margin-bottom: 30px;
         }
 
-        /* 5. Стили кнопок-ссылок */
         .links {
             display: flex;
             flex-direction: column;
-            gap: 15px; /* Расстояние между кнопками */
+            gap: 15px;
         }
 
         .link-item {
@@ -67,17 +64,18 @@
             text-decoration: none;
             color: white;
             border-radius: 15px;
-            background: rgba(255, 255, 255, 0.1); /* Полупрозрачный фон */
-            backdrop-filter: blur(10px); /* Эффект размытия */
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: transform 0.2s, background 0.2s;
+            transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
             font-weight: 600;
             font-size: 1rem;
         }
 
         .link-item:hover {
-            transform: scale(1.02); /* Легкое увеличение при наведении */
-            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.02);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 15px rgba(142, 68, 173, 0.4); /* Свечение при наведении */
         }
 
         .link-item i {
@@ -85,12 +83,10 @@
             font-size: 1.2rem;
         }
 
-        /* Цвета иконок для узнаваемости */
         .fa-telegram { color: #2AABEE; }
         .fa-vk { color: #0077FF; }
         .fa-paper-plane { color: #fff; }
 
-        /* Подвал */
         footer {
             margin-top: 40px;
             font-size: 0.8rem;
@@ -101,35 +97,32 @@
 <body>
 
     <div class="container">
-        <!-- ФОТО ПРОФИЛЯ: Замени ссылку src на своё фото -->
-        <img src="https://via.placeholder.com/150" alt="Аватар" class="avatar">
+        <!-- ВОТ ТУТ МЫ ПОДКЛЮЧАЕМ ТВОЙ ФАЙЛ avatar.jpg -->
+        <img src="avatar.jpg" alt="Rei Ayanami" class="avatar">
         
-        <!-- ИМЯ И ОПИСАНИЕ -->
-        <h1>Твой Никнейм</h1>
-        <p class="bio">Создаю контент, живу жизнь.<br>Подписывайся, тут интересно!</p>
+        <!-- Поменяй на свой ник -->
+        <h1>Omtaopr Hash</h1> 
+        <p class="bio">Just happy to be here.</p>
 
-        <!-- КНОПКИ -->
         <div class="links">
-            
-            <!-- Ссылка 1: ТГК (Канал) -->
-            <a href="https://t.me/TVOY_KANAL" class="link-item" target="_blank">
-                <i class="fab fa-telegram"></i> Мой Telegram Канал
+            <!-- Ссылка 1: ТГК -->
+            <a href="https://t.me/ТВОЙ_КАНАЛ" class="link-item" target="_blank">
+                <i class="fab fa-telegram"></i> Telegram Канал
             </a>
 
             <!-- Ссылка 2: Группа ВК -->
-            <a href="https://vk.com/TVOYA_GRUPPA" class="link-item" target="_blank">
+            <a href="https://vk.com/ТВОЯ_ГРУППА" class="link-item" target="_blank">
                 <i class="fab fa-vk"></i> Группа ВКонтакте
             </a>
 
-            <!-- Ссылка 3: Написать в ЛС -->
-            <a href="https://t.me/TVOY_USERNAME" class="link-item" target="_blank">
-                <i class="fas fa-paper-plane"></i> Написать мне в ЛС
+            <!-- Ссылка 3: ЛС -->
+            <a href="https://t.me/ТВОЙ_ЮЗЕРНЕЙМ" class="link-item" target="_blank">
+                <i class="fas fa-paper-plane"></i> Написать в ЛС
             </a>
-
         </div>
 
         <footer>
-            &copy; 2023 My Bio Link
+            &copy; 2025
         </footer>
     </div>
 
