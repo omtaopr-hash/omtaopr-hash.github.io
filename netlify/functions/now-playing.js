@@ -26,11 +26,10 @@ exports.handler = async (event, context) => {
         });
 
         if (!response.ok) {
-            // Если Яндекс вернул ошибку, например, 401 (токен неверный), 
-            // то возвращаем ошибку, чтобы на сайте не было плашки.
+            // Если Яндекс вернул ошибку, например, 401 (токен неверный)
             console.error(`Yandex API Error: ${response.status} ${response.statusText}`);
             return {
-                statusCode: 200, // Возвращаем 200, но с пустыми данными, чтобы не ломать сайт
+                statusCode: 200, 
                 body: JSON.stringify({ isPlaying: false, trackName: null, artistName: null }),
             };
         }
