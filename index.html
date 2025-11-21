@@ -10,7 +10,7 @@
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            /* Я немного поменял фон под цвета Евангелиона (темно-синий/фиолетовый) */
+            /* Фон в цветах Евангелиона */
             background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
             color: white;
             min-height: 100vh;
@@ -30,11 +30,11 @@
             width: 120px;
             height: 120px;
             border-radius: 50%;
-            object-fit: cover; /* Это важно, чтобы картинка не сплющилась */
-            object-position: center top; /* Фокус на лицо */
+            object-fit: cover;
+            object-position: center top;
             border: 3px solid rgba(255, 255, 255, 0.3);
             margin-bottom: 15px;
-            box-shadow: 0 0 20px rgba(142, 68, 173, 0.5); /* Фиолетовое свечение */
+            box-shadow: 0 0 20px rgba(142, 68, 173, 0.5);
         }
 
         h1 {
@@ -75,7 +75,7 @@
         .link-item:hover {
             transform: scale(1.02);
             background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 0 15px rgba(142, 68, 173, 0.4); /* Свечение при наведении */
+            box-shadow: 0 0 15px rgba(142, 68, 173, 0.4);
         }
 
         .link-item i {
@@ -83,8 +83,9 @@
             font-size: 1.2rem;
         }
 
+        /* Цвета иконок */
         .fa-telegram { color: #2AABEE; }
-        .fa-vk { color: #0077FF; }
+        .fa-folder-open { color: #F7D02C; } /* Желтый цвет папки */
         .fa-paper-plane { color: #fff; }
 
         footer {
@@ -97,10 +98,9 @@
 <body>
 
     <div class="container">
-        <!-- ВОТ ТУТ МЫ ПОДКЛЮЧАЕМ ТВОЙ ФАЙЛ avatar.jpg -->
-        <img src="avatar.jpeg" alt="Rei Ayanami" class="avatar">
+        <!-- ПРОВЕРЬ ИМЯ ФАЙЛА: jpg, png или jpeg? -->
+        <img src="avatar.jpg" alt="Rei Ayanami" class="avatar">
         
-        <!-- Поменяй на свой ник -->
         <h1>Omtaopr Hash</h1> 
         <p class="bio">Just happy to be here.</p>
 
@@ -110,9 +110,10 @@
                 <i class="fab fa-telegram"></i> Telegram Канал
             </a>
 
-            <!-- Ссылка 2: Группа ВК -->
-            <a href="https://vk.com/ТВОЯ_ГРУППА" class="link-item" target="_blank">
-                <i class="fab fa-vk"></i> Группа ВКонтакте
+            <!-- Ссылка 2: Мои работы (НОВАЯ) -->
+            <!-- Вставь сюда ссылку на портфолио/Behance/Папку -->
+            <a href="https://ТВОЯ_ССЫЛКА_НА_РАБОТЫ" class="link-item" target="_blank">
+                <i class="fas fa-folder-open"></i> Мои работы
             </a>
 
             <!-- Ссылка 3: ЛС -->
