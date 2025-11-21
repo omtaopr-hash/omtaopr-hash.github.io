@@ -2,7 +2,8 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="Ss" content="width=device-width, initial-scale=1.0">
+    <!-- Я исправил тут "Ss" на "viewport", чтобы на телефоне все было ровно -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ss bio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
@@ -10,13 +11,25 @@
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            /* Фон в цветах Евангелиона */
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
             color: white;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
+            overflow-x: hidden; /* Чтобы не было полос прокрутки */
+            background-color: #0f0c29; /* Цвет фона, если видео не прогрузится */
+        }
+
+        /* --- СТИЛИ ДЛЯ ВИДЕО ФОНА --- */
+        .video-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Видео растягивается на весь экран */
+            z-index: -1; /* Убираем видео на задний план */
+            filter: brightness(0.6); /* Немного затемняем видео, чтобы текст читался */
         }
 
         .container {
@@ -24,6 +37,10 @@
             max-width: 400px;
             padding: 40px 20px;
             text-align: center;
+            /* Добавим легкую подложку, чтобы текст лучше читался на фоне звезд */
+            background: rgba(0, 0, 0, 0.2); 
+            border-radius: 20px;
+            backdrop-filter: blur(3px);
         }
 
         .avatar {
@@ -41,13 +58,14 @@
             font-size: 1.5rem;
             margin: 0 0 10px;
             font-weight: 700;
-            text-shadow: 0 0 10px rgba(255,255,255,0.3);
+            text-shadow: 0 0 10px rgba(0,0,0,0.5);
         }
 
         p.bio {
-            color: #d1d1d1;
+            color: #e0e0e0;
             font-size: 0.95rem;
             margin-bottom: 30px;
+            text-shadow: 0 0 5px rgba(0,0,0,0.5);
         }
 
         .links {
@@ -64,7 +82,7 @@
             text-decoration: none;
             color: white;
             border-radius: 15px;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
@@ -74,8 +92,8 @@
 
         .link-item:hover {
             transform: scale(1.02);
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 0 15px rgba(142, 68, 173, 0.4);
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
         }
 
         .link-item i {
@@ -91,31 +109,37 @@
         footer {
             margin-top: 40px;
             font-size: 0.8rem;
-            opacity: 0.5;
+            opacity: 0.7;
         }
     </style>
 </head>
 <body>
 
+    <!-- ВИДЕО ФОН -->
+    <!-- muted = без звука, autoplay = автозапуск, loop = бесконечный повтор -->
+    <video class="video-bg" autoplay muted loop playsinline>
+        <source src="video.mp4" type="video/mp4">
+    </video>
+
     <div class="container">
-        <!-- ВАЖНО: Проверь, что имя файла картинки совпадает (тут стоит avatar.jpg) -->
+        <!-- Твоя аватарка (avatar.jpeg) -->
         <img src="avatar.jpeg" alt="Rei Ayanami" class="avatar">
         
         <h1>Ss</h1> 
-        <p class="bio">It"s a fine Day.</p>
+        <p class="bio">It's a fine Day.</p>
 
         <div class="links">
-            <!-- 1. Ссылка на ТГ канал -->
+            <!-- 1. Telegram Канал -->
             <a href="https://t.me/Logovo_goblinov" class="link-item" target="_blank">
                 <i class="fab fa-telegram"></i> Telegram Канал
             </a>
 
-            <!-- 2. Ссылка на работы (Не забудь вставить ссылку!) -->
+            <!-- 2. Мои работы -->
             <a href="https://t.me/bebebebeeheh" class="link-item" target="_blank">
                 <i class="fas fa-folder-open"></i> Мои работы
             </a>
 
-            <!-- 3. Ссылка на ЛС (@minusset) -->
+            <!-- 3. Написать в ЛС -->
             <a href="https://t.me/minusset" class="link-item" target="_blank">
                 <i class="fas fa-paper-plane"></i> Написать в ЛС
             </a>
