@@ -190,7 +190,8 @@
             height: 80px;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid #2AABEE;
+            /* ВНИМАНИЕ: Если ты используешь avatar_tg.jpg, то проверь, что в коде ниже стоит .jpg */
+            border: 3px solid #2AABEE; 
             margin-bottom: 15px;
             box-shadow: 0 0 15px rgba(42, 171, 238, 0.3);
         }
@@ -225,10 +226,64 @@
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(34, 158, 217, 0.6);
         }
+        
+        /* --- СТИЛИ ДЛЯ ПЛАШКИ МУЗЫКИ (НОВЫЕ) --- */
+        .music-plaque {
+            position: fixed; 
+            top: 25px;
+            right: 25px;
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05); 
+            backdrop-filter: blur(10px); 
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 250px;
+            z-index: 900;
+            transition: opacity 0.3s;
+            opacity: 0; /* Скрыто по умолчанию, пока не получим данные */
+        }
 
+        .music-plaque i {
+            color: #ccc;
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        .track-info {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        #track-name {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #2AABEE; 
+            overflow: hidden;
+            text-overflow: ellipsis; 
+        }
+
+        #artist-name {
+            font-size: 0.8rem;
+            color: #aaa;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
     </style>
 </head>
 <body>
+    
+    <div id="music-widget" class="music-plaque">
+        <i class="fas fa-headphones"></i>
+        <div class="track-info">
+            <span id="track-name">Загрузка...</span>
+            <span id="artist-name">Яндекс Музыка</span>
+        </div>
+    </div>
 
     <video class="video-bg" autoplay muted loop playsinline>
         <source src="video.mp4" type="video/mp4">
@@ -264,40 +319,9 @@
             <span class="close-btn" onclick="closeBtn('modal-tg')">&times;</span>
             
             <div class="tg-preview">
-                <img src="avatar_tg.jpg" class="tg-avatar-large" alt="Channel Avatar">
+                <img src="avatar_tg.jpeg" class="tg-avatar-large" alt="Channel Avatar">
                 
-                <h3 class="tg-title">Bebe Channel</h3>
-                <p class="tg-desc">Меме мхехехм</p>
-                
-                <a href="https://t.me/bebebebeeheh" target="_blank" class="tg-action-btn">
-                    Подписаться <i class="fas fa-arrow-right"></i>
-                </a>
-            </div>
-
-        </div>
-    </div>
-
-    <div id="modal-empty" class="modal" onclick="closeModal(event, 'modal-empty')">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeBtn('modal-empty')">&times;</span>
-            <span class="sad-smile">😔</span>
-            <p class="modal-text">Здесь пока пусто :(</p>
-        </div>
-    </div>
-
-    <script>
-        function openModal(modalId) {
-            document.getElementById(modalId).style.display = "flex";
-        }
-
-        function closeBtn(modalId) {
-            document.getElementById(modalId).style.display = "none";
-        }
-
-        function closeModal(event, modalId) {
-            if (event.target.id === modalId) {
-                document.getElementById(modalId).style.display = "none";
-            }
+                <h3 class="tg-title">Ss Channel
         }
     </script>
 
