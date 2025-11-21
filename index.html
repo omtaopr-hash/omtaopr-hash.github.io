@@ -155,7 +155,6 @@
             color: white;
         }
 
-        /* Анимации */
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -178,7 +177,7 @@
             color: #ddd;
         }
 
-        /* --- СТИЛИ ДЛЯ КАРТОЧКИ ТЕЛЕГРАМА ВНУТРИ ОКНА --- */
+        /* --- СТИЛИ ДЛЯ КАРТОЧКИ ТЕЛЕГРАМА --- */
         .tg-preview {
             display: flex;
             flex-direction: column;
@@ -265,10 +264,10 @@
             <span class="close-btn" onclick="closeBtn('modal-tg')">&times;</span>
             
             <div class="tg-preview">
-                <img src="avatar.jpeg" class="tg-avatar-large" alt="Channel">
+                <img src="avatar_tg.jpg" class="tg-avatar-large" alt="Channel Avatar">
                 
                 <h3 class="tg-title">Ss Channel</h3>
-                <p class="tg-desc">Новости, щитпост и моя жизнь</p>
+                <p class="tg-desc">Ммм хуета</p>
                 
                 <a href="https://t.me/bebebebeeheh" target="_blank" class="tg-action-btn">
                     Подписаться <i class="fas fa-arrow-right"></i>
@@ -281,34 +280,25 @@
     <div id="modal-empty" class="modal" onclick="closeModal(event, 'modal-empty')">
         <div class="modal-content">
             <span class="close-btn" onclick="closeBtn('modal-empty')">&times;</span>
-            
             <span class="sad-smile">😔</span>
             <p class="modal-text">Здесь пока пусто :(</p>
-        
         </div>
     </div>
 
     <script>
-        // Функция открытия любого окна по его ID
         function openModal(modalId) {
             document.getElementById(modalId).style.display = "flex";
         }
 
-        // Функция закрытия (кликом по крестику)
         function closeBtn(modalId) {
             document.getElementById(modalId).style.display = "none";
         }
 
-        // Функция закрытия (кликом по фону)
         function closeModal(event, modalId) {
             if (event.target.id === modalId) {
                 document.getElementById(modalId).style.display = "none";
             }
         }
-    </script>
-
-</body>
-</html>
     </script>
 
 </body>
