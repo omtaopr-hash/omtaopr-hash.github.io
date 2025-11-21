@@ -190,8 +190,7 @@
             height: 80px;
             border-radius: 50%;
             object-fit: cover;
-            /* ВНИМАНИЕ: Если ты используешь avatar_tg.jpg, то проверь, что в коде ниже стоит .jpg */
-            border: 3px solid #2AABEE; 
+            border: 3px solid #2AABEE;
             margin-bottom: 15px;
             box-shadow: 0 0 15px rgba(42, 171, 238, 0.3);
         }
@@ -321,8 +320,80 @@
             <div class="tg-preview">
                 <img src="avatar_tg.jpeg" class="tg-avatar-large" alt="Channel Avatar">
                 
-                <h3 class="tg-title">Ss Channel
+                <h3 class="tg-title">Ss Channel</h3>
+                <p class="tg-desc">Новости, щитпост и моя жизнь</p>
+                
+                <a href="https://t.me/Logovo_goblinov" target="_blank" class="tg-action-btn">
+                    Подписаться <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="modal-empty" class="modal" onclick="closeModal(event, 'modal-empty')">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeBtn('modal-empty')">&times;</span>
+            <span class="sad-smile">😔</span>
+            <p class="modal-text">Здесь пока пусто :(</p>
+        </div>
+    </div>
+
+    <script>
+        // === 1. ЛОГИКА МОДАЛЬНЫХ ОКОН ===
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = "flex";
         }
+
+        function closeBtn(modalId) {
+            document.getElementById(modalId).style.display = "none";
+        }
+
+        function closeModal(event, modalId) {
+            if (event.target.id === modalId) {
+                document.getElementById(modalId).style.display = "none";
+            }
+        }
+        
+        // === 2. ЛОГИКА МУЗЫКАЛЬНОЙ ПЛАШКИ ===
+        // Это адрес твоей Netlify Function
+        const API_ENDPOINT = '/.netlify/functions/now-playing'; 
+
+        async function updateNowPlaying() {
+            try {
+                const response = await fetch(API_ENDPOINT); 
+                
+                if (!response.ok) {
+                    throw new Error('Server response failed');
+                }
+
+                const data = await response.json();
+                const widget = document.getElementById('music-widget');
+                
+                // Проверка, что музыка играет
+                if (data && data.trackName && data.artistName) {
+                    document.getElementById('track-name').textContent = data.trackName;
+                    document.getElementById('artist-name').textContent = data.artistName;
+                    widget.style.opacity = '1'; // Показать плашку
+                } else {
+                    // Музыка не играет, показываем дефолтное сообщение
+                    document.getElementById('track-name').textContent = 'Музыка не играет...';
+                    document.getElementById('artist-name').textContent = 'Яндекс Музыка';
+                    widget.style.opacity = '0.5'; // Чуть приглушить, но не скрывать
+                }
+
+            } catch (error) {
+                console.error("Ошибка при получении данных о музыке:", error);
+                // При ошибке скрываем плашку
+                document.getElementById('music-widget').style.opacity = '0';
+            }
+        }
+
+        // Вызываем функцию один раз, чтобы загрузить данные при старте:
+        updateNowPlaying();
+        
+        // Затем вызываем её каждые 10 секунд для обновления:
+        setInterval(updateNowPlaying, 10000); 
     </script>
 
 </body>
