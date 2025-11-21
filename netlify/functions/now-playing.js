@@ -36,6 +36,10 @@ exports.handler = async (event, context) => {
 
         const data = await response.json();
         
+        // !!! ЭТА СТРОКА ПОКАЖЕТ, ЧТО ЯНДЕКС ВОЗВРАЩАЕТ ТВОЕМУ СЕРВЕРУ !!!
+        console.log("Yandex API Response DATA:", JSON.stringify(data)); 
+        // !!! КОНЕЦ ОТЛАДКИ !!!
+
         // Проверяем, играет ли трек
         if (data.result && data.result.player && data.result.player.track) {
             const track = data.result.player.track;
