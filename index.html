@@ -276,13 +276,24 @@
         </div>
     </div>
 
-    <div id="modal-empty" class="modal" onclick="closeModal(event, 'modal-empty')">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeBtn('modal-empty')">&times;</span>
-            <span class="sad-smile">😔</span>
-            <p class="modal-text">Здесь пока пусто :(</p>
+  <div id="modal-empty" class="modal" onclick="closeModal(event, 'modal-empty')">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeBtn('modal-empty')">&times;</span>
+        
+        <div class="tg-preview">
+            <img src="mywork.jpg" class="tg-avatar-large" alt="My Work Avatar"> 
+            
+            <h3 class="tg-title">Im eat</h3>
+            
+            <p class="tg-desc">Хз, че тут постить, работ нет.</p>
+            
+            <a href="https://t.me/myworkyesmy" target="_blank" class="tg-action-btn">
+                Перейти к работам <i class="fas fa-arrow-right"></i>
+            </a>
         </div>
+
     </div>
+</div>
 
     <script>
         // === 1. ЛОГИКА МОДАЛЬНЫХ ОКОН ===
