@@ -225,65 +225,10 @@
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(34, 158, 217, 0.6);
         }
-        
-        /* --- СТИЛИ ДЛЯ ПЛАШКИ МУЗЫКИ (НОВЫЕ) --- */
-        .music-plaque {
-            position: fixed; 
-            top: 25px;
-            right: 25px;
-            display: flex;
-            align-items: center;
-            padding: 10px 15px;
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.05); 
-            backdrop-filter: blur(10px); 
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            max-width: 250px;
-            z-index: 900;
-            transition: opacity 0.3s;
-            opacity: 0; /* Скрыто по умолчанию, пока не получим данные */
-        }
-
-        .music-plaque i {
-            color: #ccc;
-            margin-right: 10px;
-            font-size: 1.2rem;
-        }
-
-        .track-info {
-            display: flex;
-            flex-direction: column;
-            text-align: left;
-            white-space: nowrap;
-            overflow: hidden;
-        }
-
-        #track-name {
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: #2AABEE; 
-            overflow: hidden;
-            text-overflow: ellipsis; 
-        }
-
-        #artist-name {
-            font-size: 0.8rem;
-            color: #aaa;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
     </style>
 </head>
 <body>
     
-    <div id="music-widget" class="music-plaque">
-        <i class="fas fa-headphones"></i>
-        <div class="track-info">
-            <span id="track-name">Загрузка...</span>
-            <span id="artist-name">Яндекс Музыка</span>
-        </div>
-    </div>
-
     <video class="video-bg" autoplay muted loop playsinline>
         <source src="video.mp4" type="video/mp4">
     </video>
@@ -318,7 +263,7 @@
             <span class="close-btn" onclick="closeBtn('modal-tg')">&times;</span>
             
             <div class="tg-preview">
-                <img src="avatar_tg.jpg" class="tg-avatar-large" alt="avatar_tg.jpg">
+                <img src="avatar_tg.jpg" class="tg-avatar-large" alt="avatar_tg.jpg"> 
                 
                 <h3 class="tg-title">Meme channel</h3>
                 <p class="tg-desc">Mheheheheh</p>
@@ -354,46 +299,6 @@
                 document.getElementById(modalId).style.display = "none";
             }
         }
-        
-        // === 2. ЛОГИКА МУЗЫКАЛЬНОЙ ПЛАШКИ ===
-        // Это адрес твоей Netlify Function
-        const API_ENDPOINT = '/.netlify/functions/now-playing'; 
-
-        async function updateNowPlaying() {
-            try {
-                const response = await fetch(API_ENDPOINT); 
-                
-                if (!response.ok) {
-                    throw new Error('Server response failed');
-                }
-
-                const data = await response.json();
-                const widget = document.getElementById('music-widget');
-                
-                // Проверка, что музыка играет
-                if (data && data.trackName && data.artistName) {
-                    document.getElementById('track-name').textContent = data.trackName;
-                    document.getElementById('artist-name').textContent = data.artistName;
-                    widget.style.opacity = '1'; // Показать плашку
-                } else {
-                    // Музыка не играет, показываем дефолтное сообщение
-                    document.getElementById('track-name').textContent = 'Музыка не играет...';
-                    document.getElementById('artist-name').textContent = 'Яндекс Музыка';
-                    widget.style.opacity = '0.5'; // Чуть приглушить, но не скрывать
-                }
-
-            } catch (error) {
-                console.error("Ошибка при получении данных о музыке:", error);
-                // При ошибке скрываем плашку
-                document.getElementById('music-widget').style.opacity = '0';
-            }
-        }
-
-        // Вызываем функцию один раз, чтобы загрузить данные при старте:
-        updateNowPlaying();
-        
-        // Затем вызываем её каждые 10 секунд для обновления:
-        setInterval(updateNowPlaying, 10000); 
     </script>
 
 </body>
